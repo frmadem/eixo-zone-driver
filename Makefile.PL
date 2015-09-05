@@ -1,18 +1,18 @@
 use 5.018002;
 use ExtUtils::MakeMaker;
 
-unless($^O =~ /linux/i){
-	die "Not in linux " . uname();
-}
+use Devel::AssertOS qw(Linux);
+use Devel::CheckLib;
 
 my $kernel_version = `uname -r`;
 
 my ($major, $minor) = $kernel_version =~ /^(\d+)\.(\d+)/;
 
 unless($major >= 3 && $minor >= 12){
-
 	die("Needs >= 3.12 kernel version");
 }
+
+check_lib_or_exit(lib=>'cap', header=>'sys/capability.h');
 
 
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
