@@ -9,6 +9,8 @@ META.*
 *.tar.gz
 
 Makefile
+Makefile.old
+
 
 *.c
 
